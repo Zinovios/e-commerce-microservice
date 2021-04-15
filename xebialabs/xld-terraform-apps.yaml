@@ -5,39 +5,5 @@ spec:
   type: core.Directory
   children:
 
-# Provision GKE cluster using Terraform templates
-  - name: GKE-TERRAFORM
-    type: core.Directory
-    children:
-    - name: e-commerce-ms-terraform-gke
-      type: udm.Application
-      children:
-      - name: '1.0.0'
-        type: udm.DeploymentPackage
-        deployables:
-        - name: e-commerce-ms-gke
-          type: terraform.Module
-          file: !file ../terraform
-          inputVariables:
-            project_id: marcdev-e-commerce-devops
-            name: e-commerce-ms
-            region: europe-west3
-            gke_master_user: admin
-            gke_master_pass: !value K8SMasterPassword
-          environmentPath: gcp-gke-e-commerce-ms
-
-
   - name: K8S
     type: core.Directory
-
-# Provision K8s namespace
-    children:
-    - name: e-commerce-ms-namespace
-      type: udm.Application
-      children:
-      - name: '1.0.0'
-        type: udm.DeploymentPackage
-        deployables:
-        - name: xl-demo
-          type: k8s.NamespaceSpec
-          namespaceName: 'xl-demo'

@@ -45,17 +45,6 @@ spec:
       value: !value XL_DEPLOY_PASSWORD
     phases:
     
-    # Provision Infra
-    - name: Provision Infrastructure
-      color: '#ff9e3b'
-      type: xlrelease.Phase
-      tasks:
-      - name: Provision GCP GKE cluster
-        type: xldeploy.Deploy
-        server: XL Deploy
-        deploymentPackage: e-commerce-ms/GKE-TERRAFORM/e-commerce-ms-terraform-gke/1.0.0
-        deploymentEnvironment: Environments/e-commerce-ms/gcp-terraform
-    
     
     - name: Build e-commerce-ms application
       type: xlrelease.Phase
@@ -83,21 +72,6 @@ spec:
       type: xlrelease.Phase
       tasks:
       
-      - name: Deploy xl-demo namespace
-        type: xlrelease.SequentialGroup
-        tasks:
-        - name: Deploy namespace
-          type: xldeploy.Deploy
-          server: XL Deploy
-          deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-namespace/1.0.0
-          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
-        - name: Tag namespace
-          type: xld.UpdateCIProperty
-          server: XL Deploy
-          ciID: Infrastructure/e-commerce-ms/gke-e-commerce-ms-cluster-GKECluster/xl-demo
-          ciProperty: tags
-          propertyValue: '[ "xl-demo" ]'
-      
       - name: Deploy stateful services
         type: xlrelease.ParallelGroup
         tasks:
@@ -105,17 +79,17 @@ spec:
           type: xldeploy.Deploy
           server: XL Deploy
           deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-invoice-mysql/1.0.0
-          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
+          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1
         - name: Deploy store mysql svc
           type: xldeploy.Deploy
           server: XL Deploy
           deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-store-mysql/1.0.0
-          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
+          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1
         - name: Deploy notification mongodb svc
           type: xldeploy.Deploy
           server: XL Deploy
           deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-notification-mongodb/1.0.0
-          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
+          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1
       - name: Deploy stateless services
         type: xlrelease.SequentialGroup
         tasks:
@@ -123,7 +97,7 @@ spec:
           type: xldeploy.Deploy
           server: XL Deploy
           deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-registry/1.0.0
-          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
+          deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1
         - name: Deploy microservices
           type: xlrelease.ParallelGroup
           tasks:
@@ -131,17 +105,17 @@ spec:
             type: xldeploy.Deploy
             server: XL Deploy
             deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-invoice/1.0.0
-            deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
+            deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1
           - name: Deploy notification svc
             type: xldeploy.Deploy
             server: XL Deploy
             deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-notification/1.0.0
-            deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
+            deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1
           - name: Deploy store svc
             type: xldeploy.Deploy
             server: XL Deploy
             deploymentPackage: e-commerce-ms/K8S/e-commerce-ms-store/1.0.0
-            deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-e-commerce-ms
+            deploymentEnvironment: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1
     - name: Test
       type: xlrelease.Phase
       tasks:

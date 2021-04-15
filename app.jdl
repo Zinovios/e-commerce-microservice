@@ -146,3 +146,9 @@ enum NotificationType {
     EMAIL, SMS, PARCEL
 }
 microservice Notification with notification
+deployment {
+  deploymentType kubernetes
+  appsFolders [store, invoice, notification]
+  dockerRepositoryName "gcr.io/ecommerce-cluster-1"
+  kubernetesNamespace xl-demo
+}

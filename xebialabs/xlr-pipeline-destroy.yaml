@@ -24,48 +24,31 @@ spec:
         - name: Undeploy registry svc
           type: xldeploy.Undeploy
           server: XL Deploy
-          deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-registry
+          deployedApplication: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1/e-commerce-ms-registry
         - name: Undeploy invoice svc
           type: xldeploy.Undeploy
           server: XL Deploy
-          deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-invoice
+          deployedApplication: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1/e-commerce-ms-invoice
         - name: Undeploy notification svc
           type: xldeploy.Undeploy
           server: XL Deploy
-          deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-notification
+          deployedApplication: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1/e-commerce-ms-notification
         - name: Undeploy store svc
           type: xldeploy.Undeploy
           server: XL Deploy
-          deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-store
+          deployedApplication: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1/e-commerce-ms-store
       - name: Undeploy stateful services
         type: xlrelease.ParallelGroup
         tasks:
         - name: Undeploy invoice mysql svc
           type: xldeploy.Undeploy
           server: XL Deploy
-          deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-invoice-mysql
+          deployedApplication: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1/e-commerce-ms-invoice-mysql
         - name: Undeploy store mysql svc
           type: xldeploy.Undeploy
           server: XL Deploy
-          deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-store-mysql
+          deployedApplication: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1/e-commerce-ms-store-mysql
         - name: Undeploy notification mongodb svc
           type: xldeploy.Undeploy
           server: XL Deploy
-          deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-notification-mongodb
-      
-      # Un-provision namespace
-      - name: Undeploy xl-demo namespace
-        type: xldeploy.Undeploy
-        server: XL Deploy
-        deployedApplication: Environments/e-commerce-ms/gcp-gke-e-commerce-ms/e-commerce-ms-namespace
-      
-    
-    # De-provision Infra
-    - name: Deprovision Infrastructure
-      color: '#ff9e3b'
-      type: xlrelease.Phase
-      tasks:
-      - name: Deprovision GCP GKE cluster
-        type: xldeploy.Undeploy
-        server: XL Deploy
-        deployedApplication: Environments/e-commerce-ms/gcp-terraform/e-commerce-ms-terraform-gke
+          deployedApplication: Environments/e-commerce-ms/gcp-gke-gke-marcdev-e-commerce-devops-europe-west-1-ecommerce-cluster-1/e-commerce-ms-notification-mongodb
